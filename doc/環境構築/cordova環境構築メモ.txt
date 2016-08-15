@@ -1,0 +1,23 @@
+coedova環境構築メモ
+以下のURLを参考に環境構築を行う。
+cordova：http://qiita.com/cognitom/items/3b30284e8d01eaf122b7
+Genymotion：http://nelog.jp/genymotion-install
+
+
+開発フレームワークとしてcordovaを使用
+【使用する理由】
+・ios・androidで動作するアプリの作成がしたいため　
+　・HTML＋JavaScript＋CSSで多数のプラットフォーム上で動作するアプリを作成可能
+　・ネイティブコードからしか実行することができない、 カメラやコンパスなどの端末固有の機能へのインターフェイスもプラグインで提供されている
+　・プラグインは自作可能
+　　※ネイティブコードで実装
+※iosのpluinを実装するためにはMacが必要の為、今回はAndroidを作成
+
+androidのエミュレータとしてGenymotionを使用
+【使用する理由】
+・既存のAndroidエミュレータより起動・動作が早い
+
+
+
+
+
