@@ -85,8 +85,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                           'Error: Your browser doesn\'t support geolocation.');
 }
 
-function SetDistance(routeData) 
-{ 
+function SetDistance(routeData) { 
     var distance = GetDistanceKm(routeData.routes[0].legs); 
     if (distance > 100) { 
         distance = distance.toFixed(0); 
@@ -98,8 +97,7 @@ function SetDistance(routeData)
     return distance;
 } 
  
-function GetDistanceKm(legs) 
-{ 
+function GetDistanceKm(legs) { 
     var journey = 0; 
     for (var i in legs) {
         journey += legs[i].distance.value; 
@@ -107,7 +105,7 @@ function GetDistanceKm(legs)
     return journey / 1000; 
 }
 
-function addSwaiper(Distance, route){
+function addSwaiper(Distance, route) {
     var routeName = 'route' + routeNum;
     routeNum++;
     routes[routeName] = route;
@@ -121,4 +119,3 @@ function addSwaiper(Distance, route){
 function routeRender(num){
     mapRender.setDirections(routes[num]);
 }
-
