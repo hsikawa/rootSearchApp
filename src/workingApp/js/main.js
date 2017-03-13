@@ -1,9 +1,32 @@
+var routes=[];
+var routeNum=0;
+var swiper;
+var map;
+var mapRender;
+
+
+window.onload=function(){
+    swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 30,
+        observer: true
+    });
+
+}
+
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: -34.397, lng: 150.644},
+    map = new google.maps.Map(document.getElementById('map'), {
 	    zoom: 15
     });
 
+    mapRender = new google.maps.DirectionsRenderer({ // ルート描画オブジェクト
+        map: map, // 描画先の地図
+	    preserveViewport: true, // 描画後に中心点をずらさない});
+    });
     if (navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -17,15 +40,12 @@ function initMap() {
 		        title: '現在地'
 	        });
 	        marker.setMap(map);
-	        var lan = 2500;
+	        var lan = 500;
 	        
 
-	        var d = new google.maps.DirectionsService(); // ルート検索オブジェクト
-	        var r = new google.maps.DirectionsRenderer({ // ルート描画オブジェクト
-		        map: map, // 描画先の地図
-		        preserveViewport: true, // 描画後に中心点をずらさない
-	        });
-
+	        var mapDirection= new google.maps.DirectionsService(); // ルート検索オブジェクト
+	       
+            
             for (var k = 0; k < 4; k++){
                 var request = {
 		            origin: pos, // 出発地
@@ -34,17 +54,16 @@ function initMap() {
 		            travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段(歩行。DRIVINGの場合は車)
 	            };
                 var n = 1;
-		        for (var i = 0 + k*90; i < 180 + k*90; i+=90){
-		            var latlng = google.maps.geometry.spherical.computeOffset(pos,lan*n,i);
+		        for (var i = 0; i <= 180; i += 45){
+		            var latlng = google.maps.geometry.spherical.computeOffset(pos, lan * n, i + k * 90);
 		            request.waypoints.push({location:latlng});
 		            
 	            }
 	            // ルート検索
-	            d.route(request, function(result, status){
+	            mapDirection.route(request, function(result, status){
 		            // OKの場合ルート描画
 		            if (status == google.maps.DirectionsStatus.OK) {
-		                r.setDirections(result);
-                        SetDistance(result);
+                        addSwaiper(SetDistance(result), result)
 		            }
 		            console.log(result);
 	            });
@@ -76,10 +95,9 @@ function SetDistance(routeData)
         distance = distance.toFixed(1); 
     } 
     console.log(distance);
-
+    return distance;
 } 
-
-// 距離を取得します。 
+ 
 function GetDistanceKm(legs) 
 { 
     var journey = 0; 
@@ -88,3 +106,19 @@ function GetDistanceKm(legs)
     } 
     return journey / 1000; 
 }
+
+function addSwaiper(Distance, route){
+    var routeName = 'route' + routeNum;
+    routeNum++;
+    routes[routeName] = route;
+    $('#routes').append('<div id=' + routeName +  ' class="swiper-slide">' + routeName +' <br> distance: ' + Distance +' </div>');
+    $('#'+routeName).click(function(){
+        routeRender(routeName);
+    });
+    
+}
+
+function routeRender(num){
+    mapRender.setDirections(routes[num]);
+}
+
