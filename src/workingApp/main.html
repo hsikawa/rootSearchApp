@@ -2,9 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Swiper demo</title>
+    <title>RouteSearch</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="./css/swiper.min.css">
 
@@ -13,19 +19,47 @@
     
   </head>
   <body>
-    <!-- map -->
-    <div id="map"></div>
-    
-    <!-- Swiper -->
-    <div class="swiper-container">
-      <div id="routes" class="swiper-wrapper">
-        
+    <div id="header">
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">ルート検索</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">ダッシュボード</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">設定</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input id="routeDistance" class="form-control mr-sm-2" type="text" placeholder="1000m">
+            <button id="routeSearchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    <div id="routeViewArea">
+      <!-- map -->
+      <div id="map"></div>
+      
+      <!-- Swiper -->
+      <div class="swiper-container">
+        <div id="routes" class="swiper-wrapper">
+          
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
-      <!-- Add Pagination -->
-      <div class="swiper-pagination"></div>
-      <!-- Add Arrows -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
     </div>
     <!--google map -->
     <script src="js/main.js"></script>

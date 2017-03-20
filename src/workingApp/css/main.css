@@ -10,12 +10,20 @@ body {
     margin: 0;
     padding: 0;
 }
+#header {
+    position: relative;
+}
+#routeViewArea {
+    position: relative;
+    height:calc(100% - 54px);
+}
 #map {
-    height: 80%;
+    position: relative;
+    height: 90%;
 }
 .swiper-container {
     width: 100%;
-    height: 20%;
+    height: 10%;
     margin-left: auto;
     margin-right: auto;
 }
