@@ -57,8 +57,7 @@ function initMap() {
 function routeSearch(pos, routeDistance){   
     var distance = routeDistance / 5;
     var mapDirection= new google.maps.DirectionsService(); // ルート検索オブジェクト
-	
-    for (var k = 0; k < 4; k++){
+    for (var k = 0; k < 8; k++){
         var request = {
 		    origin: pos, // 出発地
 		    destination: pos, // 目的地
@@ -67,7 +66,7 @@ function routeSearch(pos, routeDistance){
 	    };
         var n = 1;
 		for (var i = 0; i <= 180; i += 45){
-		    var latlng = google.maps.geometry.spherical.computeOffset(pos, distance * n, i + k * 90);
+		    var latlng = google.maps.geometry.spherical.computeOffset(pos, distance * n, i + k * 45);
 		    request.waypoints.push({location:latlng});
 		    
 	    }
